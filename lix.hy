@@ -1,5 +1,6 @@
 (defn lixer [word-count periods long-words]
-  (+ (/ word-count periods) (/ (* long-words 100) word-count)))
+  (+ (/ word-count periods)
+     (/ (* long-words 100) word-count)))
 
 (defn take-words [text]
   (.split text " "))
@@ -26,10 +27,8 @@
 
 (defmain [&rest args]
   (let [[text (nth args 1)]]
-    (do
-      (let [[wordcount (-> text take-words count-words)]
-            [periodcount (-> text take-periods count-periods)]
-            [lwordcount (-> text take-lwords count-lwords)]]
-            (print (+ "LIX count is "
-                      (str
-                        (lixer wordcount periodcount lwordcount))))))))
+    (let [[wordcount (-> text take-words count-words)]
+          [periodcount (-> text take-periods count-periods)]
+          [lwordcount (-> text take-lwords count-lwords)]]
+      (print (+ "LIX count is "
+        (str (lixer wordcount periodcount lwordcount)))))))
